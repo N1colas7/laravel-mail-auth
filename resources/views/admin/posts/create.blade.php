@@ -29,6 +29,9 @@
                 <div class="form-group my-3">
                     <label class="control-label">Copertina</label>
                         <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror">
+                        @error('cover_image')
+                        <div class="text-danger">{{ message }}</div>
+                        @enderror
                 </div>
                 <div class="form-group mt-3 ">
                     <label class="control-label">
