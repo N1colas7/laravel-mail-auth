@@ -109,6 +109,16 @@ class PostController extends Controller
         $slug = Post::generateSlug($request->title, '-');
         $form_data['slug'] = $slug;
 
+        if($request->has('cover_image')){
+            if($post->cover_image){
+                Storage::delete($post->cover_image);
+            }
+            
+            $path = Storage::disk('public')->put('post_images',$request->cover_image);
+            
+            $form_data['cover_image'] = $path;
+        }
+
         $post->update($form_data);
 
         if($request->has('technologies')){

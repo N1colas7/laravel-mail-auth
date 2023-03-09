@@ -27,7 +27,8 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => ['required', Rule::unique('posts')->ignore($this->post), 'max:150'],
             'content' => ['nullable'],
-            'technologies' =>['exists:technologies,id']
+            'technologies' =>['exists:technologies,id'],
+            'cover_image' => ['nullable', 'image', 'max:250']
         ];
     }
         /**
@@ -41,7 +42,9 @@ class UpdatePostRequest extends FormRequest
             'title.required' => 'Il titolo è richiesto',
             'title.unique' => ' E\' già presente un progetto con questo titolo',
             'title.max' => 'Il progetto non può essere lungo più di :max caratteri',
-            'technologies.exists' => 'La tecnologia selezionata non è valida'
+            'technologies.exists' => 'La tecnologia selezionata non è valida',
+            'cover_image.image' => 'Inserire un formato di immagine valido',
+            'cover_image.max' => 'Path dell\'immagine non valido'
         ];
     }
 }
