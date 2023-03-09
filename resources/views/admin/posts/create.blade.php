@@ -15,7 +15,7 @@
             </div>
         @endif
         <div class="col-12">
-            <form action="{{ route('admin.posts.store')}}" method="POST">
+            <form action="{{ route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="control-label">
@@ -25,6 +25,10 @@
                     @error('title')
                         <div class="text-danger">{{$message}}</div>
                     @enderror
+                </div>
+                <div class="form-group my-3">
+                    <label class="control-label">Copertina</label>
+                        <input type="file" name="cover_image" id="cover_image" class="form-control @error('cover_image')is-invalid @enderror">
                 </div>
                 <div class="form-group mt-3 ">
                     <label class="control-label">
