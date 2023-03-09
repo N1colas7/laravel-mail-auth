@@ -54,7 +54,7 @@ class PostController extends Controller
         $newPost = new Post();
 
         //METTIAMO PRIMA DEL FILL
-        if($request->has('cover_image')){
+        if($request->hasFile('cover_image')){
             
             $path = Storage::disk('public')->put('post_images',$request->cover_image);
             $form_data['cover_image'] = $path;
@@ -109,7 +109,7 @@ class PostController extends Controller
         $slug = Post::generateSlug($request->title, '-');
         $form_data['slug'] = $slug;
 
-        if($request->has('cover_image')){
+        if($request->hasFile('cover_image')){
             if($post->cover_image){
                 Storage::delete($post->cover_image);
             }
@@ -122,7 +122,7 @@ class PostController extends Controller
         $post->update($form_data);
 
         if($request->has('technologies')){
-            $post->technologies()->synch($request->technologies);
+            $post->technologies()->sync($request->technologies);
         }
         return redirect()->route('admin.posts.index')->with('message', 'Hai modificato correttamente il progetto');
     }
